@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yearbook</title>
+  <style>
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        scale: 0.5;
+      }
+      to {
+        opacity: 1;
+        scale: 1;
+      }
+    }
+
+    body {
+      
+      background: linear-gradient(#99f888,#5f8160);
+    }
+
+    .body-div {
+      display: block;
+    }
+    /*--------------header--------------*/
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo {
+      height: 60px;
+      border-radius: 50%;
+      
+    }
+    .schoolName {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .name,
+    .year {
+      font-size: 19px;
+      text-align: center;
+      text-shadow : 7px 7px 16px  #4d4c4c, -14px 7px 16px  #4d4c4c ; 
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /*----------------Students---------------------*/
+    .sectionName {
+      text-align: center;
+      font-size: 25px;
+      margin-bottom: 5px;
+      text-shadow : 7px 7px 16px  #020202;
+      
+    }
+    .display-highHonor {
+      display: block;
+    }
+    .render {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .studentDiv {
+    
+      margin-top: 5px;
+      width: 30%;
+      animation: appear linear;
+      animation-timeline: view();
+      animation-range: entry 0% 
+    }
+
+    .studentPicture {
+      border-radius: 10px;
+      width: 65px;
+      align-content: center;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow : 20px 0 50px  #313131 , -20px 0 50px #313131;
+      transition: 0.5s;
+    }
+    .studentPicture:hover {
+      box-shadow : 20px 0 50px  #ffffff , -20px 0 50px #eeecec;
+    }
+   
+
+
+    .studentName {
+      font-size: 7px;
+      text-align: center;
+      margin: 0px;
+    }
+
+    /*--------------------sections---------*/
+
+    .display-section {
+      display: block;
+    }
+
+    /*-------------next & preveus button--------*/
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 11px;
+    }
+    
+    .print,
+    .next,
+    .previous {
+      display: block;
+      font-size: 15px;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    .print {
+      margin-right: 10px;
+    }
+    .next_n_print_button {
+      display: flex;
+    }
+
+    /*-------------expand image--------*/
+
+    .expand {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    .x-button {
+      font-size: 30px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    .expand-image {
+      height: 300px;
+      box-shadow: 100px 0 70px #8a8d8a , -100px 0 70px #8a8d8a; 
+    }
+
+
+  @media (min-width: 750px) {
+
+    /*--------------header--------------*/
+    .header {
+      margin-bottom: 30px;
+    }
+    .logo {
+      height: 90px;
+    }
+    .schoolName {
+      
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .name,
+    .year {
+      font-size: 25px;
+    }
+
+    /*----------------Students---------------------*/
+    .sectionName {
+      font-size: 35px;
+      margin-bottom: 5px;
+    }
+    .studentDiv {
+      margin-top: 30px;
+      width: 25%;
+    }
+    .studentPicture {
+      width: 150px;
+      box-shadow : 40px 0 100px  #313131 , -40px 0 100px #313131;
+    }
+
+   
+    .studentName {
+      font-size: 20px;
+    }
+
+    /*-------------next & preveus button--------*/
+    .buttons {
+      margin-top: 20px;
+    }
+    .print,
+    .next,
+    .previous {
+      font-size: 20px;
+    }
+
+    /*-------------expand image--------*/
+    .x-button {
+      font-size: 40px;
+    }
+    .expand-image {
+      height: 500px;
+    }
+
+  }
+
+  @media print {
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+    .header {
+      margin-bottom: 0px;
+    }
+    .logo {
+      height: 100px;
+    }
+    .schoolName {
+      font-size: 25px;
+      font-weight: bold;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    /*----------------Students---------------------*/
+    .studentDiv {
+      width: 25%;
+      margin-bottom: 20px;
+    }
+    .studentPicture {
+      width: 130px;
+    }
+    .studentName {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /*-------------next & preveus button--------*/
+    
+    /*optional*/
+    .next,
+    .next_n_print_button,
+    .print,
+    .previous,
+    .buttons {
+      display: none;
+     
+      
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    
+    .sectionName {
+      margin: 0;
+      font-size: 25px;
+    }
+  }
+
+  </style>
+
+
+</head>
+<body>
+  
+  
+  <div class="expand"></div>
+  <div class="body-div">
+    <div class="header"></div>
+    <div class="display-highHonor" ></div>
+    <div class="display-honor page-break"></div>
+  </div>
+  <div class="display-section"></div>
+  <div class="buttons">
+    <button class="previous" onclick="
+      p = p - 1
+      if (p == 0) {
+        firstPage(p)
+        
+      }else {
+        pages(p)
+      }
+      pageButton(p)
+    ">PREVIOUS</button>
+    <div class="next_n_print_button">
+      <button class="print" onclick=" 
+        remove()
+        window.print()
+        adds()">Print</button>
+      <button class="next" onclick="
+        p = p + 1;
+        pages(p);
+        pageButton(p);
+      ">NEXT</button>
+    </div>
+    
+  </div>
+  
+
+  <script>
+        
+
+    const highHonor = {
+      1 : { 
+        name : "OPIS",
+        picture : "https://i.ibb.co/127vTMN/compressed-01-OPIS.jpg"
+      },
+      2 : {
+        name : "TILAR",
+        picture : "https://i.ibb.co/GdbwCbb/compressed-02-TILAR.jpg"
+      },
+      3 : {
+        name : "ARGATE",
+        picture : "https://i.ibb.co/yPksWsg/compressed-03-ARGATE.jpg"
+      },
+      4 : {
+        name : "ANDON",
+        picture : "https://i.ibb.co/kD59W6d/compressed-04-ANDON.jpg"
+      },
+      5 : { 
+        name : "AZUCENAS",
+        picture : "https://i.ibb.co/2Ssnk58/compressed-05-AZUCENAS.jpg"
+      },
+      6 : {
+        name : "YABUT",
+        picture : "https://i.ibb.co/xGdcbrY/compressed-06-YABUT.jpg"
+      },
+      7 : {
+        name : "BUTIN",
+        picture : "https://i.ibb.co/x8Z45Dr/compressed-07-BUTIN.jpg"
+      },
+      8 : {
+        name : "BALAGA",
+        picture : "https://i.ibb.co/2Zpz8m9/compressed-08-BALAGA.jpg"
+      },
+      9 : { 
+        name : "TAPALES",
+        picture : "https://i.ibb.co/KFpVcK4/compressed-09-TAPALES.jpg"
+      },
+      10 : {
+        name : "RUEDAS",
+        picture : "https://i.ibb.co/hgDhDXC/compressed-10-RUEDAS.jpg"
+      },
+      11 : {
+        name : "VALERIANO",
+        picture : "https://i.ibb.co/jZ6sshC/compressed-11-VALERIANO.jpg"
+      },
+      12 : {
+        name : "DESDECHADO",
+        picture : "https://i.ibb.co/Fn4C19b/compressed-12-DESDECHADO.jpg"
+      },
+      13 : { 
+        name : "RISOS",
+        picture : "https://i.ibb.co/VH49GDt/compressed-13-RISOS.jpg"
+      },
+      14 : {
+        name : "ALZAGA",
+        picture : "https://i.ibb.co/FsrV1dB/compressed-14-ALZAGA.jpg"
+      },
+      15 : {
+        name : "MORANO",
+        picture : "https://i.ibb.co/g4x0LWj/compressed-15-MORANO.jpg"
+      }
+      
+    }
+
+    const honor = {
+      1 : { 
+        name : "BALAGA",
+        picture : "https://i.ibb.co/mqtNtT4/compressed-16-BALAGA.jpg"
+      },
+      2 : {
+        name : "SERAT",
+        picture : "https://i.ibb.co/vQhh9Kx/compressed-17-SERAT.jpg"
+      },
+      3 : {
+        name : "JANOLA",
+        picture : "https://i.ibb.co/f102SmY/compressed-18-JANOLA.jpg"
+      },
+      4 : {
+        name : "GUTLADERA",
+        picture : "https://i.ibb.co/KG0zcD7/compressed-19-GUTLADERA.jpg"
+      },
+      5 : {
+        name : "CAHIS",
+        picture : "https://i.ibb.co/jGjNPzH/compressed-20-CAHIS.jpg"
+      },
+      6 : { 
+        name : "ELMIDO",
+        picture : "https://i.ibb.co/JFcnvZX/compressed-21-ELMIDO.jpg"
+      },
+      7 : {
+        name : "ENTINO",
+        picture : "https://i.ibb.co/dj7Y1L7/compressed-22-ENTINO.jpg"
+      },
+      8 : {
+        name : "COMINADOR",
+        picture : "https://i.ibb.co/2gvQBxX/compressed-23-COMINADOR.jpg"
+      },
+      9 : {
+        name : "COMINADOR",
+        picture : "https://i.ibb.co/jgYr6B8/compressed-24-COMINADOR.jpg"
+      },
+      10 : {
+        name : "RINGOR",
+        picture : "https://i.ibb.co/x8RwXnn/compressed-25-RINGOR.jpg"
+      },
+      11 : { 
+        name : "ZURITA",
+        picture : "https://i.ibb.co/VMQ2w58/compressed-26-ZURITA.jpg"
+      },
+      12 : {
+        name : "ABARIENTO",
+        picture : "https://i.ibb.co/LJwJJYD/compressed-27-ABARIENTO.jpg"
+      },
+      13 : {
+        name : "AMAC",
+        picture : "https://i.ibb.co/jkh8wtc/compressed-28-AMAC.jpg"
+      }
+    }
+
+
+
+    const section1 = {
+      1 : { 
+        name : "OPIS",
+        picture : "https://i.ibb.co/127vTMN/compressed-01-OPIS.jpg"
+      },
+      2 : {
+        name : "TILAR",
+        picture : "https://i.ibb.co/GdbwCbb/compressed-02-TILAR.jpg"
+      },
+      3 : {
+        name : "ARGATE",
+        picture : "https://i.ibb.co/yPksWsg/compressed-03-ARGATE.jpg"
+      },
+      4 : {
+        name : "ANDON",
+        picture : "https://i.ibb.co/kD59W6d/compressed-04-ANDON.jpg"
+      },
+      5 : { 
+        name : "AZUCENAS",
+        picture : "https://i.ibb.co/2Ssnk58/compressed-05-AZUCENAS.jpg"
+      },
+      6 : {
+        name : "YABUT",
+        picture : "https://i.ibb.co/xGdcbrY/compressed-06-YABUT.jpg"
+      },
+      7 : {
+        name : "BUTIN",
+        picture : "https://i.ibb.co/x8Z45Dr/compressed-07-BUTIN.jpg"
+      },
+      8 : {
+        name : "BALAGA",
+        picture : "https://i.ibb.co/2Zpz8m9/compressed-08-BALAGA.jpg"
+      },
+      9 : { 
+        name : "TAPALES",
+        picture : "https://i.ibb.co/KFpVcK4/compressed-09-TAPALES.jpg"
+      },
+      10 : {
+        name : "RUEDAS",
+        picture : "https://i.ibb.co/hgDhDXC/compressed-10-RUEDAS.jpg"
+      },
+      11 : {
+        name : "VALERIANO",
+        picture : "https://i.ibb.co/jZ6sshC/compressed-11-VALERIANO.jpg"
+      },
+      12 : {
+        name : "DESDECHADO",
+        picture : "https://i.ibb.co/Fn4C19b/compressed-12-DESDECHADO.jpg"
+      },
+      13 : { 
+        name : "RISOS",
+        picture : "https://i.ibb.co/VH49GDt/compressed-13-RISOS.jpg"
+      },
+      14 : {
+        name : "ALZAGA",
+        picture : "https://i.ibb.co/FsrV1dB/compressed-14-ALZAGA.jpg"
+      },
+      15 : {
+        name : "MORANO",
+        picture : "https://i.ibb.co/g4x0LWj/compressed-15-MORANO.jpg"
+      },
+      16 : { 
+        name : "BALAGA",
+        picture : "https://i.ibb.co/mqtNtT4/compressed-16-BALAGA.jpg"
+      },
+      17 : {
+        name : "SERAT",
+        picture : "https://i.ibb.co/vQhh9Kx/compressed-17-SERAT.jpg"
+      },
+      18 : {
+        name : "JANOLA",
+        picture : "https://i.ibb.co/f102SmY/compressed-18-JANOLA.jpg"
+      },
+      19 : {
+        name : "GUTLADERA",
+        picture : "https://i.ibb.co/KG0zcD7/compressed-19-GUTLADERA.jpg"
+      },
+      20 : {
+        name : "CAHIS",
+        picture : "https://i.ibb.co/jGjNPzH/compressed-20-CAHIS.jpg"
+      },
+      21 : { 
+        name : "ELMIDO",
+        picture : "https://i.ibb.co/JFcnvZX/compressed-21-ELMIDO.jpg"
+      },
+      22 : {
+        name : "ENTINO",
+        picture : "https://i.ibb.co/dj7Y1L7/compressed-22-ENTINO.jpg"
+      },
+      23 : {
+        name : "COMINADOR",
+        picture : "https://i.ibb.co/2gvQBxX/compressed-23-COMINADOR.jpg"
+      },
+      24 : {
+        name : "COMINADOR",
+        picture : "https://i.ibb.co/jgYr6B8/compressed-24-COMINADOR.jpg"
+      },
+      25 : {
+        name : "RINGOR",
+        picture : "https://i.ibb.co/x8RwXnn/compressed-25-RINGOR.jpg"
+      },
+      26 : { 
+        name : "ZURITA",
+        picture : "https://i.ibb.co/VMQ2w58/compressed-26-ZURITA.jpg"
+      },
+      27 : {
+        name : "ABARIENTO",
+        picture : "https://i.ibb.co/LJwJJYD/compressed-27-ABARIENTO.jpg"
+      },
+      28 : {
+        name : "AMAC",
+        picture : "https://i.ibb.co/jkh8wtc/compressed-28-AMAC.jpg"
+      }
+      
+    }
+
+
+
+    const section2 = {
+      1 : { 
+        name : "AMAHAN",
+        picture : "https://i.ibb.co/7YJVf7D/compressed-01-AMAHAN.jpg"
+      },
+      2 : {
+        name : "ORIBE",
+        picture : "https://i.ibb.co/vcsjd9Y/compressed-02-ORIBE.jpg"
+      },
+      3 : {
+        name : "ORIBE",
+        picture : "https://i.ibb.co/yytnGXf/compressed-03-ORIBE.jpg"
+      },
+      4 : {
+        name : "ECIL",
+        picture : "https://i.ibb.co/x7bdPLd/compressed-04-ECIL.jpg"
+      },
+      5 : {
+        name : "ESPLANADA",
+        picture : "https://i.ibb.co/7KG9C9T/compressed-05-ESPLANADA.jpg"
+      },
+      6 : { 
+        name : "UNAT",
+        picture : "https://i.ibb.co/tLsXYTw/compressed-06-UNAT.jpg"
+      },
+      7 : {
+        name : "ANTIDO",
+        picture : "https://i.ibb.co/hsVT50y/compressed-07-ANTIDO.jpg"
+      },
+      8 : {
+        name : "ELMIDO",
+        picture : "https://i.ibb.co/L6N1vFP/compressed-08-ELMIDO.jpg"
+      },
+      9 : {
+        name : "CANALES",
+        picture : "https://i.ibb.co/6wvNnfx/compressed-09-CANALES.jpg"
+      },
+      10 : {
+        name : "CAPENA",
+        picture : "https://i.ibb.co/gt7Hp4Y/compressed-10-CAPENA.jpg"
+      },
+      11 : { 
+        name : "BUENA",
+        picture : "https://i.ibb.co/DfMC0Lx/compressed-11-BUENA.jpg"
+      },
+      12 : {
+        name : "PALLAR",
+        picture : "https://i.ibb.co/qRJgBR6/compressed-12-PALLAR.jpg"
+      },
+      13 : {
+        name : "CABIAS",
+        picture : "https://i.ibb.co/ZKcXPZM/compressed-13-CABIAS.jpg"
+      },
+      14 : {
+        name : "BARQUIN",
+        picture : "https://i.ibb.co/Qmx5PSz/compressed-14-BARQUIN.jpg"
+      },
+      15 : {
+        name : "CUARTERO",
+        picture : "https://i.ibb.co/dkZZjsh/compressed-15-CUARTERO.jpg"
+      },
+      16 : { 
+        name : "ABRASALDO",
+        picture : "https://i.ibb.co/hHqBPTt/compressed-16-ABRASALDO.jpg"
+      },
+      17 : {
+        name : "CACERES",
+        picture : "https://i.ibb.co/mNGNNwM/compressed-17-CACERES.jpg"
+      },
+      18 : {
+        name : "ANDOR",
+        picture : "https://i.ibb.co/Yhfwz4k/compressed-18-ANDOR.jpg"
+      },
+      19 : {
+        name : "SUANO",
+        picture : "https://i.ibb.co/VvdMyzX/compressed-19-SUANO.jpg"
+      },
+      20 : {
+        name : "FERNADEZ",
+        picture : "https://i.ibb.co/N9tj5dv/compressed-20-FERNANDEZ.jpg"
+      },
+      21 : { 
+        name : "MANDIA",
+        picture : "https://i.ibb.co/GkGTyNb/compressed-21-MANDIA.jpg"
+      },
+      22 : {
+        name : "BRIONES",
+        picture : "https://i.ibb.co/WHK96k4/compressed-22-BRIONES.jpg"
+      },
+      23 : {
+        name : "ALVERO",
+        picture : "https://i.ibb.co/p3svbKS/compressed-23-ALVERO.jpg"
+      },
+      24 : {
+        name : "BIGNOTEA",
+        picture : "https://i.ibb.co/NKsym3k/compressed-24-BIGNOTEA.jpg"
+      },
+      25 : {
+        name : "ALTEJAR",
+        picture : "https://i.ibb.co/xSGzj8Z/compressed-25-ALTEJAR.jpg"
+      },
+      26 : { 
+        name : "PALAHANG",
+        picture : "https://i.ibb.co/C8p8qYg/compressed-26-PALAHANG.jpg"
+      },
+      27 : {
+        name : "FELONIA",
+        picture : "https://i.ibb.co/CJRpfZR/compressed-27-FELONIA.jpg"
+      },
+      28 : {
+        name : "CERRO",
+        picture : "https://i.ibb.co/QrjkyKV/compressed-28-CERRO.jpg"
+      },
+      29 : {
+        name : "BALMES",
+        picture : "https://i.ibb.co/Vx8CqKW/compressed-29-BALMES.jpg"
+      },
+      30 : {
+        name : "GERONES",
+        picture : "https://i.ibb.co/qpjh33G/compressed-30-GERONES.jpg"
+      },
+      31 : { 
+        name : "MAPALO",
+        picture : "https://i.ibb.co/kS4Qkkv/compressed-31-MAPALO.jpg"
+      },
+      32 : {
+        name : "CADAYONG",
+        picture : "https://i.ibb.co/PWTSQv8/compressed-32-CADAYONG.jpg"
+      },
+      33 : {
+        name : "CADAYONG",
+        picture : "https://i.ibb.co/PWTSQv8/compressed-32-CADAYONG.jpg"
+      },
+      34 : {
+        name : "EVANGELISTA",
+        picture : "https://i.ibb.co/zQQb7q6/compressed-34-EVANGELISTA.jpg"
+      },
+      35 : {
+        name : "BALAGA",
+        picture : "https://i.ibb.co/LNrk1Cd/compressed-35-BALAGA.jpg"
+      },
+      36 : { 
+        name : "CABUYOG",
+        picture : "https://i.ibb.co/ZSfmyxJ/compressed-36-CABUYOC.jpg"
+      },
+      37 : {
+        name : "OBIAS",
+        picture : "https://i.ibb.co/kB4fmD8/compressed-37-OBIAS.jpg"
+      },
+      38 : {
+        name : "COPIA",
+        picture : "https://i.ibb.co/h7ds2NK/compressed-38-COPIA.jpg"
+      },
+      39 : {
+        name : "MILAR",
+        picture : "https://i.ibb.co/z6j2ZPf/compressed-39-MILAR.jpg"
+      },
+      40 : {
+        name : "CORTEL",
+        picture : "https://i.ibb.co/2ZwxyHT/compressed-40-CORTEL.jpg"
+      },
+      41 : { 
+        name : "AMAHAN",
+        picture : "https://i.ibb.co/mRJ7b5r/compressed-41-AMAHAN.jpg"
+      },
+      42 : {
+        name : "ALMADEN",
+        picture : "https://i.ibb.co/z6Z7BQZ/compressed-42-ALMADEN-Recovered.jpg"
+      },
+      43 : {
+        name : "TANA",
+        picture : "https://i.ibb.co/dc9NfkQ/compressed-43-TANA.jpg"
+      },
+      44 : {
+        name : "OCTA",
+        picture : "https://i.ibb.co/BKyz2Yf/compressed-44-OCTA.jpg"
+      },
+      45 : {
+        name : "CASTIL",
+        picture : "https://i.ibb.co/yyTr7NX/compressed-45-CASTIL.jpg"
+      },
+      46 : { 
+        name : "ORIBE",
+        picture : "https://i.ibb.co/m9HmLJ0/compressed-46-ORIBE.jpg"
+      },
+      47 : {
+        name : "AQUINO",
+        picture : "https://i.ibb.co/JcdbJ3x/compressed-47-AQUINO.jpg"
+      },
+      48 : {
+        name : "UNAT",
+        picture : "https://i.ibb.co/nLLgs3D/compressed-48-UNAT.jpg"
+      },
+      49 : {
+        name : "ESPANOL",
+        picture : "https://i.ibb.co/bgtwFjd/compressed-49-ESPANOL.jpg"
+      },
+      50 : {
+        name : "DELORIA",
+        picture : "https://i.ibb.co/2dWjtQv/compressed-50-DELORIA.jpg"
+      },
+      51 : { 
+        name : "TABAYAG",
+        picture : "https://i.ibb.co/b1RNqz5/compressed-51-TABAYAG.jpg"
+      },
+      52 : {
+        name : "MEDIONA",
+        picture : "https://i.ibb.co/8YjxnpQ/compressed-52-MEDIONA.jpg"
+      },
+      53 : {
+        name : "MONTALBAN",
+        picture : "https://i.ibb.co/s3jrm4S/compressed-53-MONTALBAN.jpg"
+      },
+      54 : {
+        name : "MULA",
+        picture : "https://i.ibb.co/59VngJj/compressed-54-MULA.jpg"
+      },
+      55 : {
+        name : "COSTORIO",
+        picture : "https://i.ibb.co/dbF45Ws/compressed-55-COSTORIO.jpg"
+      },
+      56 : { 
+        name : "REDONA",
+        picture : "https://i.ibb.co/JsxwxCV/compressed-56-REDONA.jpg"
+      },
+      57 : {
+        name : "PENARANDA",
+        picture : "https://i.ibb.co/6YGDzVS/compressed-57-PENARANDA.jpg"
+      }
+    }
+    
+    const section3 = {
+      1 : { 
+        name : "MCWILLAIMS",
+        picture : "https://i.ibb.co/ZLkj8Jp/compressed-01-MCWILLIAMS.jpg"
+      },
+      2 : {
+        name : "PENSONA",
+        picture : "https://i.ibb.co/FY2v4Sc/compressed-02-PENSONA.jpg"
+      },
+      3 : {
+        name : "CAIN",
+        picture : "https://i.ibb.co/ZdyBsPV/compressed-03-CAIN.jpg"
+      },
+      4 : {
+        name : "GALLOS",
+        picture : "https://i.ibb.co/9tNFTvn/compressed-04-GALLOS.jpg"
+      },
+      5 : {
+        name : "PATA",
+        picture : "https://i.ibb.co/mNFByyv/compressed-05-PATA.jpg"
+      },
+      6 : { 
+        name : "MATOL",
+        picture : "https://i.ibb.co/Brvg6dD/compressed-06-MATOL.jpg"
+      },
+      7 : {
+        name : "ZAMORA",
+        picture : "https://i.ibb.co/n6LDSNH/compressed-07-ZAMORA.jpg"
+      },
+      8 : {
+        name : "CALICDAN",
+        picture : "https://i.ibb.co/QFbWV14/compressed-08-CALICDAN.jpg"
+      },
+      9 : {
+        name : "ABUEVA",
+        picture : "https://i.ibb.co/8dYgKkT/compressed-09-ABUEVA.jpg"
+      },
+      10 : {
+        name : "ZUZON",
+        picture : "https://i.ibb.co/9GDQ9Tw/compressed-10-ZUZON.jpg"
+      },
+      11 : { 
+        name : "ELISEO",
+        picture : "https://i.ibb.co/DRR2XHH/compressed-11-ELISEO.jpg"
+      },
+      12: {
+        name : "DOREN",
+        picture : "https://i.ibb.co/k5N3hy1/compressed-12-DOREN.jpg"
+      },
+      13: {
+        name : "ELMIDO",
+        picture : "https://i.ibb.co/Fn1Fh6m/compressed-13-ELMIDO.jpg"
+      },
+      14: {
+        name : "HOMERES",
+        picture : "https://i.ibb.co/9vH07kv/compressed-14-HOMERES.jpg"
+      },
+      15: {
+        name : "MACASOCOL",
+        picture : "https://i.ibb.co/9ZJX5zm/compressed-15-MACASOCOL.jpg"
+      },
+      16: { 
+        name : "SY",
+        picture : "https://i.ibb.co/zHNCChv/compressed-16-SY.jpg"
+      },
+      17: {
+        name : "HERNANDEZ",
+        picture : "https://i.ibb.co/167GXTG/compressed-17-HERNANDEZ.jpg"
+      },
+      18: {
+        name : "PENARANDA",
+        picture : "https://i.ibb.co/j387Rft/compressed-18-PENARANDA.jpg"
+      },
+      19: {
+        name : "SARTILLO",
+        picture : "https://i.ibb.co/xfJ0kjN/compressed-19-SARTILLO.jpg"
+      },
+      20: {
+        name : "CANESO",
+        picture : "https://i.ibb.co/d7qQbKp/compressed-20-CANESO.jpg"
+      },
+      21 : { 
+        name : "SARTILLO",
+        picture : "https://i.ibb.co/hW3SqX8/compressed-21-SARTILLO.jpg"
+      },
+      22 : {
+        name : "MODINA",
+        picture : "https://i.ibb.co/6Zvfjm0/compressed-23-MODINA.jpg"
+      },
+      23 : {
+        name : "ROJO",
+        picture : "https://i.ibb.co/yXTsxht/compressed-23-ROJO.jpg"
+      },
+      24 : {
+        name : "CUBIAN",
+        picture : "https://i.ibb.co/2WZGfm2/compressed-24-CUBIAN.jpg"
+      },
+      25 : {
+        name : "ADONIS",
+        picture : "https://i.ibb.co/jGmTBZ9/compressed-25-ADONIS.jpg"
+      },
+      26 : { 
+        name : "TAPALES",
+        picture : "https://i.ibb.co/dMB081c/compressed-26-TAPALES.jpg"
+      },
+      27 : {
+        name : "LAMPARAS",
+        picture : "https://i.ibb.co/P5P6hCB/compressed-27-LAMPARAS.jpg"
+      },
+      28 : {
+        name : "LOPEZ",
+        picture : "https://i.ibb.co/8DrL3xw/compressed-28-LOPEZ.jpg"
+      },
+      29 : {
+        name : "BELLEZA",
+        picture : "https://i.ibb.co/Dw58qhX/compressed-29-BELLEZA.jpg"
+      },
+      30 : {
+        name : "ELARDO",
+        picture : "https://i.ibb.co/bHdDV02/compressed-30-ELARDO.jpg"
+      },
+      31 : { 
+        name : "ALMERIA",
+        picture : "https://i.ibb.co/TbSMQsL/compressed-31-ALMERIA.jpg"
+      },
+      32 : {
+        name : "GALLOS",
+        picture : "https://i.ibb.co/GPt8q1H/compressed-32-GALLOS.jpg"
+      },
+      33 : {
+        name : "COLASITO",
+        picture : "https://i.ibb.co/7V9Qz36/compressed-33-COLASITO.jpg"
+      },
+      34 : {
+        name : "OCMAR",
+        picture : "https://i.ibb.co/BB4vDqz/compressed-34-OCMAR.jpg"
+      },
+      35 : {
+        name : "SUASE",
+        picture : "https://i.ibb.co/Gn9Pktp/compressed-35-SUASE.jpg"
+      },
+      36 : { 
+        name : "GALLOS",
+        picture : "https://i.ibb.co/s9fGw7g/compressed-36-GALLOS.jpg"
+      },
+      37 : {
+        name : "ACEDO",
+        picture : "https://i.ibb.co/7QPmsc7/compressed-37-ACEDO.jpg"
+      },
+      38 : {
+        name : "PIQUE",
+        picture : "https://i.ibb.co/yfV65Zy/compressed-38-PIQUE.jpg"
+      },
+      39 : {
+        name : "REQUIOMA",
+        picture : "https://i.ibb.co/KLxjST3/compressed-39-REQUIOMA.jpg"
+      },
+      40 : {
+        name : "REQUIOMA",
+        picture : "https://i.ibb.co/Mkcknqc/compressed-40-REQUIOMA.jpg"
+      },
+      41 : { 
+        name : "BELLEZA",
+        picture : "https://i.ibb.co/Kq8f7gj/compressed-41-BELLEZA.jpg"
+      },
+      42 : {
+        name : "SARTILLO",
+        picture : "https://i.ibb.co/t2Km0px/compressed-42-SARTILLO.jpg"
+      },
+      43 : {
+        name : "ELMIDO",
+        picture : "https://i.ibb.co/4V3tq8y/compressed-43-ELMIDO.jpg"
+      },
+      44 : {
+        name : "MONZOR",
+        picture : "https://i.ibb.co/jrCX33R/compressed-44-MONZOR.jpg"
+      },
+      45 : {
+        name : "MITRA",
+        picture : "https://i.ibb.co/XknZxPz/compressed-45-MITRA.jpg"
+      },
+      46 : { 
+        name : "ABION",
+        picture : "https://i.ibb.co/MsnLxg4/compressed-46-ABION.jpg"
+      },
+      47 : {
+        name : "NOVE",
+        picture : "https://i.ibb.co/kHx0CCq/compressed-47-NOVE.jpg"
+      },
+      48 : {
+        name : "LAO",
+        picture : "https://i.ibb.co/6XRb7V0/compressed-48-LAO.jpg"
+      },
+      49 : {
+        name : "BOSQUE",
+        picture : "https://i.ibb.co/7QHm3y2/compressed-49-BOSQUE.jpg"
+      },
+      50 : {
+        name : "CORSIGA",
+        picture : "https://i.ibb.co/Hz0Brwc/compressed-50-C0-RSIGA.jpg"
+      },
+      51 : { 
+        name : "PANTIN",
+        picture : "https://i.ibb.co/Dp33NN3/compressed-51-PANTIN.jpg"
+      },
+      52 : {
+        name : "MANTILLA",
+        picture : "https://i.ibb.co/gVRM9KJ/compressed-52-MANTILLA.jpg"
+      },
+      53 : {
+        name : "DAGOHOY",
+        picture : "https://i.ibb.co/TBLQJwm/compressed-53-DAGOHOY.jpg"
+      },
+      54 : {
+        name : "ARELLANO",
+        picture : "https://i.ibb.co/VVwbSCK/compressed-54-ARELLANO.jpg"
+      },
+      55 : {
+        name : "CUTA",
+        picture : "https://i.ibb.co/gWY4QKD/compressed-55-CUTA.jpg"
+      },
+      56 : { 
+        name : "GERONES",
+        picture : "https://i.ibb.co/fY51kKt/compressed-56-GERONES.jpg"
+      },
+      57 : {
+        name : "MACABALOS",
+        picture : "https://i.ibb.co/4jhygzj/compressed-57-MACABALOS.jpg"
+      },
+      58 : { 
+        name : "ROA",
+        picture : "https://i.ibb.co/WkSBMdy/compressed-58-ROA.jpg"
+      },
+      59 : {
+        name : "BAYOT",
+        picture : "https://i.ibb.co/4MP79YF/compressed-59-BAYOT.jpg"
+      },
+      60 : {
+        name : "RUIZ",
+        picture : "https://i.ibb.co/6124Wtn/compressed-60-RUIZ.jpg"
+      },
+      61 : {
+        name : "RINOS",
+        picture : "https://i.ibb.co/r0CpD3n/compressed-61-RINOS.jpg"
+      },
+      62 : {
+        name : "BAE",
+        picture : "https://i.ibb.co/1sTpWh5/compressed-62-BAE.jpg"
+      },
+      63 : { 
+        name : "MULDEZ",
+        picture : "https://i.ibb.co/7pykgBT/compressed-63-MULDEZ.jpg"
+      },
+      64 : {
+        name : "LAUDE",
+        picture : "https://i.ibb.co/9NmDYmg/compressed-64-LAUDE.jpg"
+      },
+      65 : {
+        name : "MENDE",
+        picture : "https://i.ibb.co/hdXvT9s/compressed-65-MENDE.jpg"
+      },
+      66 : {
+        name : "COBILO",
+        picture : "https://i.ibb.co/yRN6RB4/compressed-66-COBILO.jpg"
+      },
+      67 : {
+        name : "DELORIA",
+        picture : "https://i.ibb.co/vLCNLXQ/compressed-67-DELORIA.jpg"
+      },
+      68 : { 
+        name : "FULGENCIO",
+        picture : "https://i.ibb.co/0Cgbpg7/compressed-68-FULGENCIO.jpg"
+      },
+      69 : {
+        name : "EVANGELISTA",
+        picture : "https://i.ibb.co/160GPCk/compressed-69-EVANGELISTA.jpg"
+      },
+      70 : {
+        name : "DIAZ",
+        picture : "https://i.ibb.co/2KNC66G/compressed-70-DIAZ.jpg"
+      },
+      71 : {
+        name : "ESCALONA",
+        picture : "https://i.ibb.co/2PxdN1y/compressed-71-ESCALONA.jpg"
+      },
+      72 : {
+        name : "BAJAR",
+        picture : "https://i.ibb.co/RgxYzGT/compressed-72-BAJAR.jpg"
+      },
+      73 : { 
+        name : "CAMINOC",
+        picture : "https://i.ibb.co/MGJdhcv/compressed-73-CAMINOC.jpg"
+      },
+      74 : {
+        name : "AQUINO",
+        picture : "https://i.ibb.co/b2czmqh/compressed-74-AQUINO.jpg"
+      },
+      75 : {
+        name : "GABIOLA",
+        picture : "https://i.ibb.co/nLv4Kzy/compressed-75-GABIOLA.jpg"
+      },
+      76 : {
+        name : "ELISEO",
+        picture : "https://i.ibb.co/MVPGkfv/compressed-76-ELISEO.jpg"
+      }
+    }
+
+
+    const section4 = {
+      1 : { 
+        name : "REALINO",
+        picture : "https://i.ibb.co/wRzXw4y/compressed-01-REALINO.jpg"
+      },
+      2 : {
+        name : "NUEVAS",
+        picture : "https://i.ibb.co/FV773Jp/compressed-02-NUEVAS.jpg"
+      },
+      3 : {
+        name : "BACOTO",
+        picture : "https://i.ibb.co/wSJWQDC/compressed-03-BACOTO.jpg"
+      },
+      4 : {
+        name : "CINCO",
+        picture : "https://i.ibb.co/N9Xrq8Q/compressed-04-CINCO.jpg"
+      },
+      5 : {
+        name : "SUAN",
+        picture : "https://i.ibb.co/x2f4Rp9/compressed-05-SUAN.jpg"
+      },
+      6 : { 
+        name : "DISU",
+        picture : "https://i.ibb.co/y4MjhnM/compressed-06-DISU.jpg"
+      },
+      7 : {
+        name : "BARTOLOME",
+        picture : "https://i.ibb.co/yfdwQY7/compressed-07-BARTOLOME.jpg"
+      },
+      8 : {
+        name : "NAVAL",
+        picture : "https://i.ibb.co/f43xNSn/compressed-08-NAVAL.jpg"
+      },
+      9 : {
+        name : "CABIAS",
+        picture : "https://i.ibb.co/9ts0yny/compressed-09-CABIAS.jpg"
+      },
+      10 : {
+        name : "HONGO",
+        picture : "https://i.ibb.co/3FynBqc/compressed-10-HONGO.jpg"
+      },
+      11 : { 
+        name : "COBACHA",
+        picture : "https://i.ibb.co/PQnx9Js/compressed-11-COBACHA.jpg"
+      },
+      12 : {
+        name : "DOREN",
+        picture : "https://i.ibb.co/mqQZnJz/compressed-12-DOREN.jpg"
+      }
+    }
+
+
+    const section5 = {
+      1 : { 
+        name : "BONAJOS",
+        picture : "https://i.ibb.co/DgwHCQV/compressed-01-BONAJOS.jpg"
+      },
+      2 : {
+        name : "INTEGRO",
+        picture : "https://i.ibb.co/3WcHBtb/compressed-02-INTEGRO.jpg"
+      },
+      3 : {
+        name : "INDAY",
+        picture : "https://i.ibb.co/PM3Rtk7/compressed-03-INDAY.jpg"
+      },
+      4 : {
+        name : "VILLANUEVA",
+        picture : "https://i.ibb.co/m818B1s/compressed-04-VILLANUEVA.jpg"
+      },
+      5 : {
+        name : "ANICETE",
+        picture : "https://i.ibb.co/Sxg6LKY/compressed-05-ANICETE.jpg"
+      },
+      6 : { 
+        name : "GUTLADERA",
+        picture : "https://i.ibb.co/bQfyQP5/compressed-06-GUTLADERA.jpg"
+      },
+      7 : {
+        name : "PARTOSA",
+        picture : "https://i.ibb.co/XJ0YNyW/compressed-07-PARTOSA.jpg"
+      },
+      8 : {
+        name : "BRILATA",
+        picture : "https://i.ibb.co/55cMRdM/compressed-08-BRILATA.jpg"
+      },
+      9 : {
+        name : "LIBA",
+        picture : "https://i.ibb.co/xXY5W8w/compressed-09-LIBA.jpg"
+      }
+    }
+//--------------------------customize  logo and name of School-------------------------------
+    const heads = ["https://i.ibb.co/G9T9DXD/abuyog-logo.jpg","Abuyog Community College Senior High","2023-2024","https://i.ibb.co/tZdCyvZ/acc-logo.jpg"]
+
+//-----------------------------------customize section list object----------------------------
+    const pagelist = [[highHonor,honor],section1,section2,section3,section4,section5]
+
+//----------------------------customize name of section --------------------------
+    const section_list = [["-----------High Honors-----------","-----------Honors-----------"],"-----------ABM-----------","-----------HUMSS-----------","-----------STEM-----------","-----------COOKERY-----------","-----------CSS-----------"]
+
+    let p = 0;
+
+   
+    const element_expand = document.querySelector(".expand");
+    const element_body_div = document.querySelector(".body-div");
+    const element_buttons = document.querySelector(".buttons");
+    const element_display_section = document.querySelector(".display-section")
+
+    
+
+    firstPage(p)
+    pageButton(p)
+
+//----------------------------render all sections--------------------------------
+    function pages(p) {
+      element_body_div.style.display = "none"
+      element_display_section.style.display = "block"
+      
+      let section = ``;
+      let i = 1
+      while (pagelist[p][i] != undefined) {
+        section += `<div class="studentDiv">
+          <img class="studentPicture" src="${pagelist[p][i].picture}" alt="" loading="lazy" onclick="
+          pages_expand('${pagelist[p][i].picture}')
+          ">
+          <p class="studentName">${pagelist[p][i].name}</p>
+        </div>`;
+        i++
+      }
+      element_display_section.innerHTML = `<p class="sectionName">${section_list[p]}</p><div class="render">${section}</div>`
+    }
+
+    
+    
+
+    function pages_expand(image) {
+      
+      document.body.style.background = "#5f7a60"
+      element_display_section.style.display = "none"
+      element_buttons.style.display = "none"
+      element_expand.style.display = "flex"
+      element_expand.innerHTML = `
+        <button class="x-button" onclick="pages_close()">x</button>
+        <img src="${image}" alt="" class="expand-image">
+      `;
+
+    }
+
+    function pages_close() {
+      document.body.style.background = "linear-gradient(#99f888,#5f8160)"
+      element_expand.style.display = "none"
+      element_buttons.style.display = "flex"
+      element_display_section.style.display = "block"
+    }
+
+
+
+//--------------------------------------------first page------------------------------
+    function firstPage(p) {
+      element_display_section.style.display = "none"
+      element_body_div.style.display = "block"
+      const element_header = document.querySelector(".header");
+      const element_highHonor = document.querySelector(".display-highHonor");
+      const element_honor = document.querySelector(".display-honor");
+      
+      let header = "";
+      let highHonor = "";
+      let honor = "";
+
+//------------------header---------------------
+      header = `
+        <img class="logo" src="${heads[0]}" alt="">
+        <div class="schoolName">
+          <p class="name">${heads[1]}</p>
+          <p class="year">${heads[2]}</p>
+          </div>
+        <img class="logo" src="${heads[3]}" alt="">
+      `;
+
+      element_header.innerHTML = header;
+//---------------------high honor -------------------
+      let i = 1;
+      while (pagelist[p][0][i] != undefined) {
+        highHonor += `<div class="studentDiv">
+          <img class="studentPicture" src="${pagelist[p][0][i].picture}" alt="" loading="lazy"  onclick="firstpage_expand('${pagelist[p][0][i].picture}')">
+          <p class="studentName">${pagelist[p][0][i].name}</p>
+        </div>`;
+        i++
+      }
+      element_highHonor.innerHTML = `<p class="sectionName">${section_list[p][0]}</p><div class="render">${highHonor}</div>`;
+      i = 1;
+//---------------------honor-----------------------
+      while (pagelist[p][1][i] != undefined) {
+        honor += `<div class="studentDiv">
+          <img class="studentPicture" src="${pagelist[p][1][i].picture}" alt="" loading="lazy" onclick="firstpage_expand('${pagelist[p][1][i].picture}')" >
+          <p class="studentName">${pagelist[p][1][i].name}</p>
+        </div>`;
+        i++
+      }
+      element_honor.innerHTML = `<p class="sectionName">${section_list[p][1]}</p><div class="render">${honor}</div>`;
+      i = 1;
+    }
+
+    function firstpage_expand(image) {
+      document.body.style.background = "#5f7a60"
+      element_body_div.style.display = "none"
+      element_expand.style.display = "flex"
+      element_buttons.style.display = "none"
+      element_expand.innerHTML = `
+      <button class="x-button" onclick="firstpage_close()">x</button>
+      <img src="${image}" alt="" class="expand-image">
+     `;
+    }
+
+    function firstpage_close() {
+      document.body.style.background = "linear-gradient(#99f888,#5f8160)"
+      element_expand.style.display = "none"
+      element_body_div.style.display = "block"
+      element_buttons.style.display = "flex"
+    }
+
+
+
+
+
+
+    function pageButton(p) {
+      const element_buttons = document.querySelector('.buttons');
+      const element_previous = document.querySelector('.previous');
+      const element_next = document.querySelector('.next');
+     
+      
+      if (p <= 0) {
+        element_previous.style.display = "none"
+        element_next.style.display = "block"
+        element_buttons.style.justifyContent = "flex-end";
+      }else if (p == pagelist.length - 1) {
+        element_next.style.display = "none"
+        element_previous.style.display = "block"
+        element_buttons.style.justifyContent = "space-between"
+
+      }else if (p > 0 && p <= pagelist.length - 1) {
+        element_previous.style.display = "block"
+        element_next.style.display = "block"
+        element_buttons.style.justifyContent = "space-between"
+      }
+      
+    }
+
+    function remove() {
+      const element_buttons = document.querySelector(".buttons");
+      element_buttons.style.display = "none"
+    }
+
+    function adds() {
+      const element_buttons = document.querySelector(".buttons");
+      element_buttons.style.display = "flex"
+    }
+
+    
+
+    
+  </script>
+</body>
+</html>
